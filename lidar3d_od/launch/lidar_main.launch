@@ -1,0 +1,4 @@
+<launch>    
+    <node name="ObstacleDetector3d" pkg="lidar3d_od" type="obstacledetector3d" output="screen">
+    </node>
+</launch>
