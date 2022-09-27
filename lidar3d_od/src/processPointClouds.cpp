@@ -14,7 +14,7 @@ ProcessPointClouds<PointT>::~ProcessPointClouds() {}
 template<typename PointT>
 void ProcessPointClouds<PointT>::numPoints(typename pcl::PointCloud<PointT>::Ptr cloud)
 {
-    std::cout << cloud->points.size() << std::endl;
+    //std::cout << cloud->points.size() << std::endl;
 }
 /*FilterCloud function filters the given cloud. Following operations are performed
  * Downsampling: points are converted to voxels using the dimensions provided.
@@ -37,7 +37,7 @@ typename pcl::PointCloud<PointT>::Ptr ProcessPointClouds<PointT>::FilterCloud(ty
     sor.setInputCloud (cloud);
     sor.setLeafSize (filterRes, filterRes, filterRes);
     sor.filter (*cloud_filtered);
-    std::cerr << "Voxeled " << cloud_filtered->points.size () << std::endl;
+    //std::cerr << "Voxeled " << cloud_filtered->points.size () << std::endl;
 
     // Crop the scene to create ROI
     // pcl::CropBox<PointT> roi;
@@ -65,9 +65,9 @@ typename pcl::PointCloud<PointT>::Ptr ProcessPointClouds<PointT>::FilterCloud(ty
     pcl::PassThrough<PointT> zroi;
 	zroi.setInputCloud(cloud_filtered);
     zroi.setFilterFieldName("z");
-    zroi.setFilterLimits(-0.8, 1.5);	// can chanege -1 to -0.5: remove floor
+    zroi.setFilterLimits(-0.5, 1.2);	// can chanege -1 to -0.5: remove floor
     zroi.filter(*cloud_filtered);
-    cerr << "ROI " << cloud_filtered->points.size() << "\n";
+    //cerr << "ROI " << cloud_filtered->points.size() << "\n";
 	
 	// make 2D(BEV) BoundingBox
 	// for(int index = 0; index < cloud_filtered->points.size(); index++)
@@ -157,7 +157,7 @@ std::pair<typename pcl::PointCloud<PointT>::Ptr, typename pcl::PointCloud<PointT
 	std::pair<typename pcl::PointCloud<PointT>::Ptr, typename pcl::PointCloud<PointT>::Ptr> segResult = SeparateClouds(inliers,cloud);
     auto endTime = std::chrono::steady_clock::now();
     auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
-    std::cout << "plane segmentation took " << elapsedTime.count() << " milliseconds" << std::endl;
+    //std::cout << "plane segmentation took " << elapsedTime.count() << " milliseconds" << std::endl;
 
     return segResult;
 }
@@ -260,7 +260,7 @@ std::pair<typename pcl::PointCloud<PointT>::Ptr, typename pcl::PointCloud<PointT
 
     auto endTime = std::chrono::steady_clock::now();
     auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
-    std::cout << "plane segmentation took " << elapsedTime.count() << " milliseconds" << std::endl;
+    //std::cout << "plane segmentation took " << elapsedTime.count() << " milliseconds" << std::endl;
 
 
     return segResult;
@@ -304,7 +304,7 @@ std::vector<typename pcl::PointCloud<PointT>::Ptr> ProcessPointClouds<PointT>::C
 	  }
     auto endTime = std::chrono::steady_clock::now();
     auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
-    std::cout << "clustering took " << elapsedTime.count() << " milliseconds and found " << clusters.size() << " clusters" << std::endl;
+    //std::cout << "clustering took " << elapsedTime.count() << " milliseconds and found " << clusters.size() << " clusters" << std::endl;
 
     return clusters;
 }
@@ -411,7 +411,7 @@ std::vector<typename pcl::PointCloud<PointT>::Ptr> ProcessPointClouds<PointT>::C
 	  }
     auto endTime = std::chrono::steady_clock::now();
     auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
-    std::cout << "euclideanClustering took " << elapsedTime.count() << " milliseconds and found " << clusters.size() << " clusters" << std::endl;
+    //std::cout << "euclideanClustering took " << elapsedTime.count() << " milliseconds and found " << clusters.size() << " clusters" << std::endl;
 
     return clusters;
 }

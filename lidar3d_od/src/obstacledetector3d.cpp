@@ -89,7 +89,7 @@ void cloud_cb (const sensor_msgs::PointCloud2& ros_pc)
 
     ProcessPointClouds<pcl::PointXYZI>* pointProcessorI = new ProcessPointClouds<pcl::PointXYZI>();
 
-    cerr << "Raw " << input_ptr->points.size() << "\n";
+    //cerr << "Raw " << input_ptr->points.size() << "\n";
 
     /*Filter: Crop the scene to requested dimensions and remove the points from the roof top*/
 	  output_ptr = pointProcessorI->FilterCloud(input_ptr, 0.13); // or *input_ptr
@@ -105,7 +105,7 @@ void cloud_cb (const sensor_msgs::PointCloud2& ros_pc)
     visualization_msgs::MarkerArray markers_array;
     for(pcl::PointCloud<pcl::PointXYZI>::Ptr cluster : cloudClusters)
     {
-      std::cout << "cluster size ";
+      //std::cout << "cluster size ";
       pointProcessorI->numPoints(cluster);
 
       pcl::PCLPointCloud2 pcl_pc1; // temporary PointCloud2 intermediary
