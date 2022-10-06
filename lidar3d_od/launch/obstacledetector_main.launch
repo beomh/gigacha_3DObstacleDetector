@@ -1,5 +1,4 @@
 <launch>    
     <node name="ObstacleDetector3d" pkg="lidar3d_od" type="obstacledetector3d" output="screen"></node>
         <param name='max_ptr_num'   value="1500"/>
-    <!--<node name="ObstacleDetector3d" pkg="lidar3d_od" type="obstacledetector3d"></node>-->
 </launch>

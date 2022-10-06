@@ -5,6 +5,7 @@
 ros::Publisher pub1;
 ros::Publisher pub2;
 ros::Publisher pub3;
+int max_ptr_num_;
 // ConstPtr
 // void MakeVisual(const sensor_msgs::PointCloud2& cloud_msg, int num){
 // 	sensor_msgs::PointCloud2 input_cloud;
@@ -99,7 +100,8 @@ void cloud_cb (const sensor_msgs::PointCloud2& ros_pc)
     /*Clustering: Identify the clusters from objects*/
 	  //std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr> cloudClusters = pointProcessorI->Clustering_euclideanCluster(segmentCloud.first, 0.5, 100, 1000);
     //std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr> cloudClusters = pointProcessorI->Clustering(segmentCloud.first, 0.5, 20, 1500);
-    std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr> cloudClusters = pointProcessorI->Clustering(output_ptr, 0.6, 10, 1500);
+    std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr> cloudClusters = pointProcessorI->Clustering(output_ptr, 0.6, 10, max_ptr_num_);
+    // cout << max_ptr_num_ << endl;
 
     int clusterId = 0;
     visualization_msgs::MarkerArray markers_array;
@@ -191,6 +193,8 @@ int main(int argc, char** argv)
   // Initialize ROS
   ros::init (argc, argv, "ObstacleDetector3d");
   ros::NodeHandle nh;
+
+  nh.param<int>("max_ptr_num", max_ptr_num_, 1500);
 
   // // Create a ROS subscriber for the input point cloud
   ros::Subscriber sub = nh.subscribe("/velodyne_points", 1, cloud_cb);
