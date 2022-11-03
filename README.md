@@ -16,6 +16,15 @@ $ ./environment    # 실행파일 실행
 </code>
 </pre>
 
+or
+
+<pre>
+<code>
+$ lm && slb
+$ rosrun lidar3d_od obstacledetector3d
+</code>
+</pre>
+
 # Dependencies
 - pcl_conversions
 - pcl_ros
