@@ -3,6 +3,7 @@
 + ROS1 환경에서 실행
 
 # 실행 방법
+참고 깃허브 실행 방법
 <pre>
 <code>
 $ sudo apt install libpcl-dev    # pcl c++ 라이브러리 설치
